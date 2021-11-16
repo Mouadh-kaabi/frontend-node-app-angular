@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,6 +20,8 @@ import { QuickViewModalComponent } from './components/partial/modal/quick-view-m
 import { AddToCartModalComponent } from './components/partial/modal/add-to-cart-modal/add-to-cart-modal.component';
 import { DeleteProductModalComponent } from './components/partial/modal/delete-product-modal/delete-product-modal.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AuthInterceptor } from './interceptor/auth.interceptor';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -42,9 +45,13 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatProgressSpinnerModule
   ],
-  providers: [],
+  providers: [
+    {provide : HTTP_INTERCEPTORS, useClass : AuthInterceptor , multi : true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

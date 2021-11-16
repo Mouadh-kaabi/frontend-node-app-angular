@@ -111,6 +111,9 @@ export class AuthService {
     this.userId = null ;
     this.token = null ; 
 
+    localStorage.removeItem('auth') ;
+
+    
    
   }
 }

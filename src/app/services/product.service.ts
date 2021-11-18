@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { Subject } from 'rxjs';
+
+import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Data } from '../models/data';
-import { Product } from '../models/product';
+import {  Product } from '../models/product';
 
 @Injectable({
   providedIn: 'root'
@@ -45,22 +46,22 @@ export class ProductService {
   }
   getProductById(id : string)
   {
-    return new Promise((resolve,reject)=>{
-      this.http.get<any>(this.api+'/products/'+id).subscribe(
-        (data :Data)=>{
-          if(data.status == 200)
-          {
-            resolve(data.result)
-          }else{
-            reject(data.message)
-          }
+    return new Promise<any>((resolve,reject)=>{
+      this.http.get<any>(this.api+`/products/${id}`).subscribe(
+        (data: Data) => {
 
+          if (data.status === 200) {
+            resolve(data.result);
+
+          } else {
+            reject(data.message);
+          }
         },
-        (err)=>{
-          reject(err)
+        err=>{
+          reject(err);
         }
       )
-    })
+    })       
   }
 
   createNewProduct (product : Product , image : File)

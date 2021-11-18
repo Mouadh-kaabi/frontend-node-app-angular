@@ -12,9 +12,9 @@
                     <div class="card-body">
                         <div class="product-thumbnail position-relative">
                             <span class="badge badge-danger top-right">New</span>
-                            <a>
-                                <img class="first-img" width="420" [src]="product.image" alt="thumbnail">
-                            </a>
+                            <div  [routerLink]="[ '/single-product', product._id ]">
+                                <img class="first-img" width="100" [src]="product?.image" alt="thumbnail">
+                            </div>
                             <!-- product links -->
                             <ul class="product-links d-flex justify-content-center">
 
@@ -27,7 +27,8 @@
                             <!-- product links end-->
                         </div>
                         <div class="product-desc py-0">
-                            <h3 class="title"><a href="">{{product.name}}</a></h3>
+                            <h3 class="title"><a href="" *ngFor="let product ">{{product?.name}}</a></h3>
+                            <h3 class="title"><a href="">{{product?.stock}}</a></h3>
                             <div class="star-rating">
                                 <span class="ion-ios-star"></span>
                                 <span class="ion-ios-star"></span>

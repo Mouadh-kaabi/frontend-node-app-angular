@@ -1,7 +1,9 @@
 export class Data {
-    constructor( public status : number , public message :  string, public result : any)
+    constructor()
     {
            
 
     }
+
+    status : number ;  message :  string;  result : any
 }

@@ -15,6 +15,8 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
 
+
+    
     this.serviceauth.isAuth$.subscribe(
       (bool : boolean)=>{
         this.isAuth = bool ;

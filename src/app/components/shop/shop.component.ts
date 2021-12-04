@@ -10,37 +10,35 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class ShopComponent implements OnInit {
 
-  products : Product[] ;
-  userId : any ; 
-  productSub : Subscription ;
-
-  loading : boolean ; 
   constructor(private serviceProduct : ProductService) { }
 
+  products : Product  [] ;
+  productSub :  Subscription ; 
+  userId  : any  ;
+  loading : boolean ; 
   ngOnInit(): void {
 
-    console.log(this.products);
-    
+    this.productSub = this.serviceProduct.products$.subscribe(
 
-  this.productSub =   this.serviceProduct.products$.subscribe(
+      (products : Product[])=>{
 
-    (products : Product[])=>{
-      this.loading = true ;
-      this.products = products ; 
+        this.loading = true ;
 
-    },
+        this.products = products ;
+      },
 
-    (err)=>{
+      (err)=>{
+        this.loading = false ;
+        console.log(err);
+        
+      }
+    );
+    this.serviceProduct.getProduct();
 
-      this.loading = false ; 
-      console.log(err);
-      
-    }
-   
 
-  );
 
-  this.serviceProduct.getProduct();
+ 
+
   }
 
   ngOnDestroy(): void {
@@ -48,5 +46,8 @@ export class ShopComponent implements OnInit {
     //Add 'implements OnDestroy' to the class.
     this.productSub.unsubscribe();
   }
+
+
+
 
 }

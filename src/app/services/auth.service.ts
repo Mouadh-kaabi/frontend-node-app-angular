@@ -27,7 +27,7 @@ export class AuthService {
     //return promise parceque avec le promis on sait quand va attendre
     //elle retourne un oobservable il faut l'abonement 
     return  new Promise((resolve,reject)=>{
-      this.http.post<any>(this.api+'/user/signup',{email:email,password : password}).subscribe(
+      this.http.post<any>(this.api+'/users/signup',{email:email,password : password}).subscribe(
         (signupData: {status : number,message : string})=>{
 
 
@@ -60,7 +60,7 @@ export class AuthService {
   {
     return new Promise((resolve,reject)=>{
 
-      this.http.post<any>(this.api+'/user/login',{email :email , password : password}).subscribe(
+      this.http.post<any>(this.api+'/users/login',{email :email , password : password}).subscribe(
         (authData:{token : string , userId : string})=>{
 
           this.token = authData.token ;

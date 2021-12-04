@@ -13,11 +13,15 @@ import {  Product } from '../models/product';
 export class ProductService {
 
   api = environment.api;
-  products : Product [];
-  products$ = new Subject<Product[]>();
+ private products : Product [] = [];
+   products$ = new Subject<Product[]>();
 
   constructor(private http : HttpClient) { }
 
+
+  getProfilesStream() {
+    return this.products$.asObservable();
+  }
   
   emitProduct()
   {
@@ -26,23 +30,36 @@ export class ProductService {
 
   getProduct()
   {
-    this.http.get<any>(this.api+'/products').subscribe(
-      (data : Data)=>{
-       if (data.status == 200 ){
-          this.products = data.result; 
-          this.emitProduct();
 
-        }else {
-          console.log(data);
+    return this.http
+    .get<any>(this.api+'/products').subscribe(
+      (data : Data)=>{
+        if (data.status == 200 ){
+           this.products = data.result; 
+           this.emitProduct();
+
+          }else {
+            console.log(data);
+            
+          }
+  
+        },
+        (error)=>{
+          console.log(error);
           
         }
+      )
 
-      },
-      (error)=>{
-        console.log(error);
-        
-      }
-    )
+ 
+   
+
+
+
+
+
+
+
+  
   }
   getProductById(id : string)
   {
@@ -66,6 +83,8 @@ export class ProductService {
 
   createNewProduct (product : Product , image : File)
   {
+
+    
     return new Promise((resolve,reject)=>{
       let productData : FormData  = new FormData ();
 

@@ -130,7 +130,7 @@ export class ProductService {
 
       productData.append('product',JSON.stringify(product));
 
-      this.http.put<any>(this.api+'/products/update'+id,productData).subscribe(
+      this.http.put<any>(this.api+`/products/${id}`,productData).subscribe(
 
         (data:Data)=>{
 

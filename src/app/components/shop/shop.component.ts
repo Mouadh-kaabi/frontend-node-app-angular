@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import {Product } from 'src/app/models/product';
+import { AuthService } from 'src/app/services/auth.service';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -10,13 +11,17 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class ShopComponent implements OnInit {
 
-  constructor(private serviceProduct : ProductService) { }
+  constructor(private serviceProduct : ProductService,private auth : AuthService) { }
 
   products : Product  [] ;
   productSub :  Subscription ; 
-  userId  : any  ;
+  userId  :any ;
   loading : boolean ; 
   ngOnInit(): void {
+
+    this.userId = this.auth.userId ;
+    console.log(this.userId);
+    
 
     this.productSub = this.serviceProduct.products$.subscribe(
 

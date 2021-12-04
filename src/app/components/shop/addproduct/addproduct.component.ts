@@ -42,6 +42,8 @@ export class AddproductComponent implements OnInit {
 
     this.userId= this.auth.userId;
 
+    console.log(this.userId);
+    
     
   }
 
@@ -71,7 +73,7 @@ export class AddproductComponent implements OnInit {
     product.stock = this.productForm.get('stock')?.value;
     product.image = '';
     product.userId = this.userId ; 
-    console.log(this.product);
+    console.log(product.userId);
     
 
     this.serviceProduct.createNewProduct(this.product, this.productForm.get('image')?.value)

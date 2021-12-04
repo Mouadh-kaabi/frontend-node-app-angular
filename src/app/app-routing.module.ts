@@ -9,6 +9,7 @@ import { CartComponent } from './components/shop/cart/cart.component';
 import { EditproductComponent } from './components/shop/editproduct/editproduct.component';
 import { ShopComponent } from './components/shop/shop.component';
 import { SingleproductComponent } from './components/shop/singleproduct/singleproduct.component';
+import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
 
@@ -16,9 +17,9 @@ const routes: Routes = [
   {path:'signup',component:SignupComponent},
   {path:'signin',component:SigninComponent},
   {path:'shop',component:ShopComponent},
-  {path:'add-product',component:AddproductComponent},
+  {path:'add-product',component:AddproductComponent , canActivate : [AuthGuard]},
   {path:'single-product/:id',component:SingleproductComponent},
-  {path:'edit-product/:id',component:EditproductComponent},
+  {path:'edit-product/:id',component:EditproductComponent,canActivate : [AuthGuard]},
   {path:'cart',component:CartComponent},
   {path:'home',component:HomeComponent},
   {path:'not-found',component:NotFoundComponent},

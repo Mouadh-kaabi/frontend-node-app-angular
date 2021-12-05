@@ -153,7 +153,7 @@ export class ProductService {
   {
     return new Promise((resolve,reject)=>
     {
-      this.http.delete(this.api+'/products/delete'+id).subscribe(
+      this.http.delete(this.api+`/products/${id}`).subscribe(
 
         ()=>{
           this.getProduct();

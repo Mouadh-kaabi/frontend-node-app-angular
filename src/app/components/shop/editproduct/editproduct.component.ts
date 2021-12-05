@@ -77,6 +77,13 @@ export class EditproductComponent implements OnInit {
 
     this.loading = true ;
     const product = new Product();
+
+    if(this.product.userId !== this.userId)
+            {
+              console.log("You can't edit this product ");
+              
+             //return  this.router.navigate(['/not-found'])
+            }
     product._id = this.product._id ;
 
     product.name = this.productForm.get('name')?.value;

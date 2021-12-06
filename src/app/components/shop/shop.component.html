@@ -38,7 +38,7 @@
                                 
                                 <button class="pro-btn"  *ngIf="userId == userId"  [routerLink]="[ '/edit-product', product._id ]"  ><i class="ion-android-create"></i></button>
                                 <button class="pro-btn"  data-toggle="modal" *ngIf="userId === userId" [attr.data-target]="'#delete-product-'+product._id"><i class="ion-android-remove"></i></button>
-                                <button class="pro-btn" data-toggle="modal" data-target="#add-to-cart"><i class="icon-basket"></i></button>
+                                <button class="pro-btn" data-toggle="modal" (click)= "addToCart(product)" data-target="#add-to-cart"><i class="icon-basket"></i></button>
                             </div>
 
                             <app-delete-product-modal 

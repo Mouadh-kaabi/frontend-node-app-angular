@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import {Product } from 'src/app/models/product';
 import { AuthService } from 'src/app/services/auth.service';
+import { CartService } from 'src/app/services/cart.service';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -11,7 +12,7 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class ShopComponent implements OnInit {
 
-  constructor(private serviceProduct : ProductService,private auth : AuthService) { }
+  constructor(private serviceProduct : ProductService,private auth : AuthService,private cartService : CartService) { }
 
   products : Product  [] ;
   productSub :  Subscription ; 
@@ -44,6 +45,13 @@ export class ShopComponent implements OnInit {
 
  
 
+  }
+
+  addToCart(product : Product)
+  {
+    this.cartService.addToCart(product);
+    console.log(this.cartService.cart);
+    
   }
 
   ngOnDestroy(): void {
